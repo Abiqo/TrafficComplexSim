@@ -1,29 +1,13 @@
-function [agentInfo] = CreateAgents(nAgents,sizeOfGrid,probOfState,initialMatrix)
+function agentPos =CreateAgents(cityMap,N)
 
-state = randsrc(nAgents,1, [1,2;probOfState(1,1),probOfState(1,2)]);
-position = zeros(nAgents,1);
-destination = zeros(nAgents,1);
-velDelay = zeros(nAgents,1);
-agentInfo = cell(nAgents,1);
+nAgents=5;
+agentPos=randi(N,nAgents,2)
 
-for i = 1:nAgents
-position(i,1:2) = randi([1 sizeOfGrid],1,2);
-
-        while initialMatrix(position(i,1),position(i,2)) ~= 1
-            position(i,1:2) = randi([1 sizeOfGrid],1,2);
-        end
-
-destination(i,1:2) = randi([1 sizeOfGrid],1,2);
-    
-        while initialMatrix(destination(i,1),destination(i,2)) ~= 1 && ismember(destination(i,1:2),position(i,1:2),'rows') == 1 
-            destination(i,1:2) = randi([1 sizeOfGrid],1,2);
-        end
-
-    if find(state(i)==1)
-        velDelay(i) = 1;
-    elseif find(state(i)==2)
-        velDelay(i) = 4;
+for i=1:nAgents
+    if mod(agentPos(i,1),2)==0
+       if mod(agentPos(i,2),2)==0
+           agentPos(i,2)=agentPos(i,2)-1;
+       end
     end
-
-agentInfo{i}={position(i,1:2);destination(i,1:2);state(i);velDelay(i)};
 end
+
