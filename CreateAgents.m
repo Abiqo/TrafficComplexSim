@@ -2,14 +2,14 @@ function [agentInfo] = CreateAgents(nAgents,N,probOfState,cityMap)
 
 state = randsrc(nAgents,1, [1,2;probOfState(1,1),probOfState(1,2)]);
 position = zeros(nAgents,1);
-destination = zeros(nAgents,1);
+%destination = zeros(nAgents,1);
 velDelay = zeros(nAgents,1);
 agentInfo = cell(nAgents,1);
 
-for i = 1:length(state)
+for i = 1:nAgents
     position(i,1:2) = randi(N,1,2);
     
-    while cityMap(position(i,1),position(i,2)) == 0
+    while cityMap(position(i,1),position(i,2)) == 0 || cityMap(position(i,1),position(i,2)) == 2
         position(i,1:2) = randi(N,1,2);
     end
     

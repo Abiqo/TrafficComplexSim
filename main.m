@@ -2,9 +2,9 @@
 clear
 clc
 nTimesteps = 100;
-nAgents = 5;
-N = 10; % N has to be a number of size 9*x+1 in order for the city to have a road in the outer bounds
-nSteps = 3;
+nAgents = 100;
+N = 100; % N has to be a number of size 9*x+1 in order for the city to have a road in the outer bounds
+nSteps = 8;
 probOfState = [0.3 0.7]; %Car vs bike
 
 
@@ -18,10 +18,12 @@ cityMap=InitGrid(N, nSteps);
 buildingPos=CreateBuildings(cityMap);
 
 t = 0;
-for t=1:nTimesteps
+for T=1:nTimesteps
     t = t + 1;
-    
+    if t <= 1
+        previousStep = [];
+    end
     Vizualisation(agentInfo, buildingPos, nAgents, t, N)
-    %[agents] = UpdateAgents(agents,initialMatrix,range)
+    [agentInfo, previousStep] = UpdateAgents(agentInfo,cityMap,N, nAgents,t ,previousStep);
     
 end

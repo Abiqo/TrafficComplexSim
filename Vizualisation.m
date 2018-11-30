@@ -12,7 +12,7 @@ hLeg = legend('example');
 set(hLeg,'visible','off');
 
 hold on
-scatter(buildingPos(:,1),buildingPos(:,2),1500,'square','Filled','black')
+scatter(buildingPos(:,1),buildingPos(:,2),N,'square','Filled','black')
 grid on
 axis([0 N+1 0 N+1])
 title(['t = ', num2str(t),' [s]'])
