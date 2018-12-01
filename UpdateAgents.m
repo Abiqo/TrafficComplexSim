@@ -1,4 +1,4 @@
-function  [agentInfo, previousStep] = UpdateAgents(agentInfo,cityMap,N, nAgents, t,previousStep)
+function  [agentInfo, previousStep] = UpdateAgents(agentInfo,cityMap,N, nAgents, t,previousStep,delay)
 %Assuming agents is a struct with
 % pos[x y]
 % velDelay || a scalar 1 or 4
@@ -9,6 +9,7 @@ for i = 1:nAgents
     positions(i,:) = agentInfo{i}{1};
     state(i) = agentInfo{i}{3};
     destination(i,:) = agentInfo{i}{2};
+    thisDelay=agentInfo{i}{4};
     
     if t <= 1
         previousStep(i,:) = [inf,inf];
@@ -17,9 +18,9 @@ for i = 1:nAgents
     if positions(i,1) == destination(i,1) && positions(i,2) == destination(i,2)
         agentInfo{i}{1} = positions(i,:);
         
-    else
-    nextStep(i,:) = NextStep(positions, i, destination, cityMap, N, previousStep);
-    agentInfo{i}{1} = nextStep(i,:);
+    elseif mod(delay,thisDelay)==0 % moves vehicle every nth step where n = vehicle delay
+        nextStep(i,:) = NextStep(positions, i, destination, cityMap, N, previousStep);
+        agentInfo{i}{1} = nextStep(i,:);
     end
     previousStep(i,:) = positions(i,:);
 end

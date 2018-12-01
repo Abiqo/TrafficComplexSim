@@ -18,12 +18,14 @@ cityMap=InitGrid(N, nSteps);
 buildingPos=CreateBuildings(cityMap);
 
 t = 0;
+delay=0; 
+
 for T=1:nTimesteps
     t = t + 1;
     if t <= 1
         previousStep = [];
     end
     Vizualisation(agentInfo, buildingPos, nAgents, t, N)
-    [agentInfo, previousStep] = UpdateAgents(agentInfo,cityMap,N, nAgents,t ,previousStep);
-    
+    [agentInfo, previousStep] = UpdateAgents(agentInfo,cityMap,N, nAgents,t ,previousStep,delay);
+    delay=delay+1;
 end
