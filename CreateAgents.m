@@ -1,23 +1,23 @@
-function [agentInfo] = CreateAgents(nAgents,N,probOfState,cityMap)
+function [agentInfo] = CreateAgents(p)
 
-state = randsrc(nAgents,1, [1,2;probOfState(1,1),probOfState(1,2)]);
-position = zeros(nAgents,1);
+state = randsrc(p.nAgents,1, [1,2;p.probOfState(1,:)]);
+position = zeros(p.nAgents,1);
 %destination = zeros(nAgents,1);
-velDelay = zeros(nAgents,1);
-agentInfo = cell(nAgents,1);
+velDelay = zeros(p.nAgents,1);
+agentInfo = cell(p.nAgents,1);
 
-for i = 1:nAgents
-    position(i,1:2) = randi(N,1,2);
+for i = 1:p.nAgents
+    position(i,1:2) = randi(p.N,1,2);
     
-    while cityMap(position(i,1),position(i,2)) == 0 || cityMap(position(i,1),position(i,2)) == 2
-        position(i,1:2) = randi(N,1,2);
+    while p.cityMap(position(i,1),position(i,2)) == 0 || p.cityMap(position(i,1),position(i,2)) == 2
+        position(i,1:2) = randi(p.N,1,2);
     end
     
     
-    destination(i,1:2) = randi(N,1,2);
+    destination(i,1:2) = randi(p.N,1,2);
     
-    while cityMap(destination(i,1),destination(i,2)) ~= 1 || ismember(destination(i,1:2),position(i,1:2),'rows') == 1
-        destination(i,1:2) = randi(N,1,2);
+    while p.cityMap(destination(i,1),destination(i,2)) ~= 1 || ismember(destination(i,1:2),position(i,1:2),'rows') == 1
+        destination(i,1:2) = randi(p.N,1,2);
     end
     
    

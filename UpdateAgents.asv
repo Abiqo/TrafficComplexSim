@@ -34,13 +34,12 @@ for i = 1:p.nAgents
                 alreadyMember = ismember(p.agentsAtIntersection, nextStep(i,:),'rows');
                 alreadyMember = any(alreadyMember);
             end
-            %If it is not, add it to the list "agentsAtIntersection"
+            %If it is not, add it to the list of agents at an intersection
             if(~alreadyMember)
                 p.agentsAtIntersection(end+1,:) = nextStep(i, :);
             end
+            
         end
-        
-        %If nextStep ~
         agentInfo{i}{1} = nextStep(i,:);
         
     end

@@ -1,5 +1,7 @@
-function cityMap = InitGrid(N, nSteps)
+function cityMap = InitGrid(p)
 
+N = p.N;
+nSteps = p.nSteps;
 cityMap=zeros(N);
 
 for i=1:N

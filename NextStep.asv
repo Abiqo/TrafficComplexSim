@@ -1,4 +1,4 @@
-function [nextStep] = NextStep(positions, i, destination, p, previousStep)
+function [nextStep] = NextStep(positions, i, destination, p, previousStep, positionsOfBusyIntersections)
 
 closestPoints = [positions(i,1),positions(i,2)+1; positions(i,1),positions(i,2)-1; positions(i,1) + 1,positions(i,2);positions(i,1) - 1,positions(i,2)];
 
@@ -19,7 +19,13 @@ for j = 1:size(closestPoints,1)
         
     elseif p.cityMap(nextX, nextY) == 2
 %         checkStatus = intersections;
+            nextPos = [nextX, nextY];
             
+            isTheNextPosBusy =  any(ismember(positionsOfBusyIntersections,nextPos));
+            
+            if(isTheNextPosBusy)
+                closestPoints(j,:) = [inf, inf];
+            end
     end
         
 end
@@ -37,3 +43,6 @@ indexOfMin = find(dist == minDistance,1);
 %The next step is the closestPoint such that it is the minimum Distance
 nextStep = closestPoints(indexOfMin,:);
 
+if(isempty(closestPoints))
+    nextStep = positions(i,:);
+end

@@ -1,4 +1,10 @@
-function [] = Vizualisation(agentInfo, buildingPos, nAgents, t, N)
+function Vizualisation(agentInfo, p)
+
+buildingPos = p.buildingPos;
+t = p.t;
+N = p.N;
+nAgents = p.nAgents;
+
 positions = zeros(nAgents,2);
 for i = 1:nAgents
     positions(i,:) = agentInfo{i}{1};

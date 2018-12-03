@@ -1,5 +1,5 @@
 
-function buildingPos = CreateBuildings(cityMap)
+function buildingPos = CreateBuildings(p)
 
-[j,i] = find(cityMap == 0);
+[j,i] = find(p.cityMap == 0);
 buildingPos = [i,j];
