@@ -19,4 +19,4 @@ for T=1:p.nTimesteps
     [agentInfo, previousStep] = UpdateAgents(agentInfo, p, previousStep);
     %pause(0.5)  
 end
-p.cityMap
+
