@@ -6,7 +6,6 @@ function  [agentInfo, previousStep] = UpdateAgents(agentInfo,p,previousStep)
 % state || a scalar 1 or 2
 
 
-
 %Update the agents
 for i = 1:p.nAgents
     positions(i,:) = agentInfo{i}{1};

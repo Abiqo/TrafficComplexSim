@@ -6,6 +6,9 @@ for j = 1:size(closestPoints,1)
     nextX = closestPoints(j,1);
     nextY = closestPoints(j,2);
     
+    % TODO: 1) fix s.t. agents don't switch to forbidden lanes
+           %2) fix starting positions vs. direction
+    
     %If the nextX/nextY are out of the boundaries
     if nextX > p.N || nextX <= 0 || nextY > p.N || nextY <= 0 
         closestPoints(j,:) = [inf, inf]; 
@@ -17,7 +20,7 @@ for j = 1:size(closestPoints,1)
     elseif nextX == previousStep(i,1) && nextY == previousStep(i,2) 
         closestPoints(j,:) = [inf, inf];
         
-    elseif p.cityMap(nextX, nextY) == 2
+    elseif p.cityMap(nextX, nextY) == 3
 %         checkStatus = intersections;
             
     end

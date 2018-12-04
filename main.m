@@ -17,5 +17,6 @@ for T=1:p.nTimesteps
     p.t = p.t + 1;
     Vizualisation(agentInfo, p)
     [agentInfo, previousStep] = UpdateAgents(agentInfo, p, previousStep);
-    pause(0.5)
+    %pause(0.5)  
 end
+p.cityMap
