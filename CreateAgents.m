@@ -16,7 +16,7 @@ for i = 1:p.nAgents
     
     destination(i,1:2) = randi(p.N,1,2);
     
-    while p.cityMap(destination(i,1),destination(i,2)) ~= 1 || ismember(destination(i,1:2),position(i,1:2),'rows') == 1 
+    while p.cityMap(destination(i,1),destination(i,2)) == 0 || ismember(destination(i,1:2),position(i,1:2),'rows') == 1 
         destination(i,1:2) = randi(p.N,1,2);
     end
     

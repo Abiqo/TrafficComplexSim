@@ -1,4 +1,4 @@
-function [nextStep] = NextStep(positions, i, destination, p, previousStep)
+function [nextStep] = NextStep(positions, i, destination, p, previousStep, positionOfCars)
 sideOfRoad = p.cityMap(positions(i,1),positions(i,2));
 
 [closestPoints] = possibleSteps(sideOfRoad,positions,i, p);
@@ -41,4 +41,8 @@ minDistance = min(dist);
 indexOfMin = find(dist == minDistance,1);
 %The next step is the closestPoint such that it is the minimum Distance
 nextStep = closestPoints(indexOfMin,:);
+
+if isempty(nextStep) == 1 || ismember(nextStep,positionOfCars, 'rows') == 1
+    nextStep = positions(i,:);
+end
 

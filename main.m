@@ -16,7 +16,7 @@ previousStep = ones(p.nAgents,2)*inf;
 for T=1:p.nTimesteps
     p.t = p.t + 1;
     Vizualisation(agentInfo, p)
-    [agentInfo, previousStep] = UpdateAgents(agentInfo, p, previousStep);
-    %pause(0.5)  
+    [agentInfo, previousStep, p] = UpdateAgents(agentInfo, p, previousStep);
+    pause(0.1)  
 end
 
