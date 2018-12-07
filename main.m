@@ -2,21 +2,27 @@
 clear; clc; close all
 
 p = CreateParameters();
-p.cityMap=InitGrid(p);
 
-[agentInfo] = CreateAgents(p); % Stored in a cell array. First agent's info is reached by agentInfo{1}.
-% To see the info on must write agentInfo{1}{x}, where x = 1,2,3,4 and 1
-% --> position, 2 -- > destination, 3 --> state(i) and 4 --> velDelay.
-% Thus, agentInfo{3}{2} will give the third agent's destination.
+testProportionSize = size(p.probOfState,1);
 
-p.buildingPos=CreateBuildings(p);
-p.intersectionPositions = IntersectionPositions(p);
-
-previousStep = ones(p.nAgents,2)*inf;
-for T=1:p.nTimesteps
-    p.t = p.t + 1;
-    Vizualisation(agentInfo, p)
-    [agentInfo, previousStep, p] = UpdateAgents(agentInfo, p, previousStep);
-    pause(0.1)  
+%Test each proportion!
+while(p.currentProportionIndex < testProportionSize)
+    p.currentProportionIndex = p.currentProportionIndex +1;
+    [agentInfo] = CreateAgents(p);
+    previousStep = ones(p.nAgents,2)*inf;
+    p = ResetParameters();
+    
+    %Run until all the agents have reached a destination
+    while(p.nAgents>0)
+        p.t = p.t + 1;
+        Vizualisation(agentInfo, p)
+        [agentInfo, previousStep, p] = UpdateAgents(agentInfo, p, previousStep);
+        pause(0.1)
+    end
+    
+    p.proportionHistory.bikes(p.currentProportionIndex,1) = mean(p.bikeTimes);
+    p.proportionHistory.cars(p.currentProportionIndex,1) = mean(p.carTimes);
 end
+
+PlotGraphs(p)
 

@@ -14,19 +14,16 @@ for j = 1:size(closestPoints,1)
     if nextX > p.N || nextX <= 0 || nextY > p.N || nextY <= 0
         closestPoints(j,:) = [inf, inf];
         
-        %if the nextpoint is a building
+    %if the nextpoint is a building
     elseif p.cityMap(nextX, nextY) == 0
         closestPoints(j,:) = [inf, inf];
         %if the nextpoint is the same as previous point
     elseif nextX == previousStep(i,1) && nextY == previousStep(i,2)
         closestPoints(j,:) = [inf, inf];
-        
         % Check so next step is not change of lane
     elseif p.cityMap(nextX,nextY)*sideOfRoad == 2
         closestPoints(j,:) = [inf, inf];
-
     end
-        
 end
 
 %If closestpoint is infinite, remove them from closestPoints!
