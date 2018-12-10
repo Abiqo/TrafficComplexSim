@@ -1,4 +1,5 @@
 function [closestPoints] = possibleSteps(sideOfRoad,positions,i, p)
+
 if sideOfRoad == 1
     closestPoints = [positions(i,1),positions(i,2)+1;positions(i,1) - 1,positions(i,2)];
     

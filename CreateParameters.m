@@ -2,7 +2,8 @@ function p = CreateParameters()
 
 p.t = 0;
 p.nSteps = 7;
-p.nAgents =600;
+p.nAgents =1000;
+p.waitingTime=20; % period of traffic light waiting time, must be even
 p.storedCars = [];
 p.savedState = [];
 p.storedPositions = [];

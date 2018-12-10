@@ -1,16 +1,17 @@
 function  [agentInfo, previousStep, p] = UpdateAgents(agentInfo,p,previousStep)
+
 %Assuming agents is a struct with
 % pos[x y]
 % velDelay || a scalar 1 or 4
 % dest [x y] vector
 % state || a scalar 1 or 2
+
 for i = 1:p.nAgents
     positions(i,:) = agentInfo{i}{1};
     state(i) = agentInfo{i}{3};
-    
 end
-p.storedPositions{p.t} = positions;
 
+p.storedPositions{p.t} = positions;
 cars = find(state == 1);
 positionOfCars = positions(cars,:);
 p.storedCars{p.t} = positionOfCars;
@@ -25,11 +26,9 @@ if p.t > 5
         if ismember(oldPositions(i,:),olderPositions)
             count = count + 1;
         end
-        
     end
     
     if count/size(oldPositions,1) > 0.6
-        
         for k = 1:size(positionOfCars,1)
             mapState(k) = p.cityMap(positionOfCars(k,1),positionOfCars(k,2));
         end
@@ -84,9 +83,22 @@ for i = 1:p.nAgents
         p.time(end+1) = p.t;
         p.savedState(end+1) = state(i);
         
-        % Update agent every nth step where n = vehicle delay
-    elseif mod(p.t-1,delay)==0
+    % Update agent every nth step where n = vehicle delay
+    elseif mod(p.t-1,delay)==0 
+        
         nextStep(i,:) = NextStep(positions, i, destination, p, previousStep, positionOfCars, state, position_critical_agent);
+        thisRoadType=p.cityMap(positions(i,1),positions(i,2));
+        nextRoadType=p.cityMap(nextStep(i,1),nextStep(i,2));
+        
+        if mod(p.t,p.waitingTime) < p.waitingTime/2    % up/down don't move
+            if thisRoadType~=3 && nextRoadType==3 && positions(i,2)~= nextStep(i,2)
+                nextStep(i,:)=positions(i,:); %don't move
+            end
+        elseif mod(p.t,p.waitingTime) >= p.waitingTime/2    % right/left don't move
+            if thisRoadType~=3 && nextRoadType==3 && positions(i,1)~= nextStep(i,1)
+                nextStep(i,:)=positions(i,:); %don't move
+            end
+        end
         
         %Check if the nextStep is at intersection
         atIntersection = ismember(p.intersectionPositions,nextStep(i,:),'rows');

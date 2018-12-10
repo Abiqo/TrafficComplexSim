@@ -17,6 +17,7 @@ gscatter(positions(:,1),yPositions, state')
 hLeg = legend('example');
 set(hLeg,'visible','off');
 
+%gray=[0.5 0.5 0.5].*ones(p.nAgents,1);
 hold on
 scatter(buildingPos(:,1),buildingPos(:,2),N,'square','Filled','black')
 grid on

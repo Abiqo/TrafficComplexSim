@@ -1,6 +1,5 @@
 function [nextStep] = NextStep(positions, i, destination, p, previousStep, positionOfCars, state, position_critical_agent)
 
-
 sideOfRoad = p.cityMap(positions(i,1),positions(i,2));
 sideOfRoad_destination = p.cityMap(destination(i,1),destination(i,2));
 
