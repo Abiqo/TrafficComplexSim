@@ -1,29 +1,26 @@
-% main
 clear; clc; close all
 
-p = CreateParameters();
-p.cityMap=InitGrid(p);
+p = CreateParameters([]);
 
-[agentInfo, previousStep] = CreateAgents(p); % Stored in a cell array. First agent's info is reached by agentInfo{1}.
-% To see the info on must write agentInfo{1}{x}, where x = 1,2,3,4 and 1
-% --> position, 2 -- > destination, 3 --> state(i) and 4 --> velDelay.
-% Thus, agentInfo{3}{2} will give the third agent's destination.
+testProportionSize = size(p.probOfState,1);
 
-p.buildingPos=CreateBuildings(p);
-p.intersectionPositions = IntersectionPositions(p);
-
-%previousStep = ones(p.nAgents,2)*inf;
-
-while p.nAgents > 0
-% for T=1:p.nTimesteps
-    p.t = p.t + 1;
-    Vizualisation(agentInfo, p)
-    [agentInfo, previousStep, p] = UpdateAgents(agentInfo, p, previousStep);
-    %pause(0.5)  
+%Test each proportion!
+while(p.currentProportionIndex < testProportionSize)
+    p.currentProportionIndex = p.currentProportionIndex +1;
+    [agentInfo] = CreateAgents(p);
+    previousStep = ones(p.nAgents,2)*inf;
+    p = ResetParameters(p);
+    
+    %Run until all the agents have reached a destination
+    while(p.nAgents>0)
+        p.t = p.t + 1;
+        %Vizualisation(agentInfo, p)
+        [agentInfo, previousStep, p] = UpdateAgents(agentInfo, p, previousStep);
+    end
+    
+    p.proportionHistory.bikes(p.currentProportionIndex,1) = mean(p.bikeTimes);
+    p.proportionHistory.cars(p.currentProportionIndex,1) = mean(p.carTimes);
+    
 end
 
-disp('Mean avg time for cars = ')
-disp(mean(p.time(find(p.savedState == 1))))
-disp('Mean avg time for bikes = ')
-disp(mean(p.time(find(p.savedState == 2))))
-
+PlotGraphs(p)

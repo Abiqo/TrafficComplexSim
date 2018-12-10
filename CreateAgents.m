@@ -1,6 +1,6 @@
 function [agentInfo, previousStep] = CreateAgents(p)
 
-state = randsrc(p.nAgents,1, [1,2;p.probOfState(1,:)]);
+state = randsrc(p.nAgents,1, [1,2;p.probOfState(p.currentProportionIndex,:)]);
 position = zeros(p.nAgents,1);
 %destination = zeros(nAgents,1);
 velDelay = zeros(p.nAgents,1);

@@ -1,5 +1,6 @@
 function Vizualisation(agentInfo, p)
 
+figure(1)
 buildingPos = p.buildingPos;
 t = p.t;
 N = p.N;
