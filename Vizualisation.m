@@ -1,5 +1,5 @@
 function Vizualisation(agentInfo, p)
-figure(1)
+
 buildingPos = p.buildingPos;
 t = p.t;
 N = p.N;
@@ -12,8 +12,8 @@ for i = 1:nAgents
 end
 
 clf
-
-gscatter(positions(:,1),positions(:,2), state')
+yPositions = p.N+1-positions(:,2) ;
+gscatter(positions(:,1),yPositions, state')
 hLeg = legend('example');
 set(hLeg,'visible','off');
 
