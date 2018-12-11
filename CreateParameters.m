@@ -21,5 +21,5 @@ p.agentsAtIntersection = [];
 p.carTimes = [];
 p.bikeTimes = [];
 p.currentProportionIndex = 0;
-p.proportionHistory.bikes = [];
-p.proportionHistory.cars = [];
+p.proportionHistory.bikes = zeros(size(p.probOfState,1),1);
+p.proportionHistory.cars = zeros(size(p.probOfState,1),1);
