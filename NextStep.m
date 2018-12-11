@@ -1,4 +1,4 @@
-function [nextStep] = NextStep(positions, i, destination, p, previousStep, positionOfCars, state, position_critical_agent)
+function [nextStep] = NextStep(positions, i, destination, p, previousStep, positionOfCars, positionOfBikes, state, position_critical_agent)
 
 sideOfRoad = p.cityMap(positions(i,1),positions(i,2));
 sideOfRoad_destination = p.cityMap(destination(i,1),destination(i,2));
@@ -11,14 +11,12 @@ if destination(i,2)+1 < p.N
             opposite_destination = [destination(i,1)-1,destination(i,2)];
         end
     else
-        
         if sideOfRoad_destination == 1
             opposite_destination = [destination(i,1),destination(i,2)+1];
         else
             opposite_destination = [destination(i,1),destination(i,2)-1];
         end
     end
-    
 else
     opposite_destination = [destination(i,1),destination(i,2) - 1];
 end
@@ -43,9 +41,7 @@ for j = 1:size(closestPoints,1)
         % Check so next step is not change of lane
     elseif p.cityMap(nextX,nextY)*sideOfRoad == 2
         closestPoints(j,:) = [inf, inf];
-        
     end
-    
 end
 
 %If closestpoint is infinite, remove them from closestPoints!
@@ -62,39 +58,33 @@ minDistanceDirection = min(dist_direction);
 minDistanceDirectionOpposite = min(dist_direction_opposite);
 maxDistance = max(dist_direction);
 
-
 indexOfMin = find(dist_direction == minDistanceDirection,1);
 indexOfMinOpposite = find(dist_direction_opposite == minDistanceDirectionOpposite,1);
 
 if minDistanceDirectionOpposite < minDistanceDirection
     nextStep = closestPoints(indexOfMinOpposite,:);
-else
-    
+else    
     nextStep = closestPoints(indexOfMin,:);
 end
 
 %The next step is the closestPoint such that it is the minimum Distance
 %nextStep = closestPoints(indexOfMin,:);
 
-if isempty(nextStep) == 1 
-        nextStep = positions(i,:);
-end
-
-if ismember(positions(i,:),position_critical_agent)
+if ismember(positions(i,:),position_critical_agent) 
     if ismember(nextStep,positionOfCars, 'rows') == 1
         nextStep = closestPoints(find(dist_direction == maxDistance,1),:);
+    elseif ismember(nextStep,positionOfBikes, 'rows') == 1 
+        nextStep = closestPoints(find(dist_direction == maxDistance,1),:); 
     end
 end
-if isempty(nextStep) == 1 
-        nextStep = positions(i,:);
-end
 
-if state(i) == 1
-    
+if state(i) == 1    %cars
     if isempty(nextStep) || ismember(nextStep,positionOfCars, 'rows')
         nextStep = positions(i,:);
     end
+elseif state(i) == 2 %bikes
+    if isempty(nextStep) || ismember(nextStep,positionOfBikes, 'rows')
+        nextStep = positions(i,:);
+    end
 end
-
-
 

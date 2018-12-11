@@ -66,7 +66,5 @@ elseif sideOfRoad == 3
         
     elseif positions(i,2)+1 <= p.N && positions(i,1)+1 <= p.N
         closestPoints = [positions(i,1),positions(i,2)+1];
-        
-        
     end
 end

@@ -1,5 +1,5 @@
 function proportions = CreateStateProportions()
 
-for i = 1:8
-   proportions(i,:) = [0.9-i*0.1 0.1+i*0.1];
+for i = 1:11
+   proportions(i,:) = [1-(i-1)*0.1, (i-1)*0.1];
 end
