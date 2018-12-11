@@ -4,12 +4,10 @@ p = CreateParameters([]);
 
 testProportionSize = size(p.probOfState,1);
 
-runs=10;
-
 %Test each proportion!
 while(p.currentProportionIndex < testProportionSize)
     p.currentProportionIndex = p.currentProportionIndex + 1;
-    for i=1:runs
+    for i=1:p.runs
         p = ResetParameters(p);
         [agentInfo, previousStep] = CreateAgents(p);
         
@@ -25,7 +23,7 @@ while(p.currentProportionIndex < testProportionSize)
     end
 end
 
-p.proportionHistory.bikes=p.proportionHistory.bikes/runs;
-p.proportionHistory.cars=p.proportionHistory.cars/runs;
+p.proportionHistory.bikes=p.proportionHistory.bikes/p.runs;
+p.proportionHistory.cars=p.proportionHistory.cars/p.runs;
 
 PlotGraphs(p)

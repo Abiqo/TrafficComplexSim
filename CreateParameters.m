@@ -1,5 +1,5 @@
 function p = CreateParameters(p)
-
+p.runs = 10;
 p.t = 0;
 p.nSteps = 7;
 p.waitingTime=20; % period of traffic light waiting time

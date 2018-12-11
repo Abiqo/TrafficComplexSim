@@ -6,11 +6,13 @@ function  [agentInfo, previousStep, p] = UpdateAgents(agentInfo,p,previousStep)
 % dest [x y] vector
 % state || a scalar 1 or 2
 
+%For all agents, store positions and its state
 for i = 1:p.nAgents
     positions(i,:) = agentInfo{i}{1};
     state(i) = agentInfo{i}{3};
 end
 
+%Finds all the cars, stores them in p.storedCars
 p.storedPositions{p.t} = positions;
 cars = find(state == 1);
 positionOfCars = positions(cars,:);
@@ -88,9 +90,10 @@ for i = 1:p.nAgents
     agentState = agentInfo{i}{3};
     
     %If the position of the agent and its destination are the same
-    %dont change anything
     if positions(i,1) == destination(i,1) && positions(i,2) == destination(i,2)
-        %agentInfo{i}{1} = positions(i,:);
+        %Store the agent elapsed time to carTimes if
+        % it is a car, bikeTimes if it is a bike.
+        %Remove the agent from the agentInfo
         if(agentState == 1)
             p.carTimes(end+1,1) = p.t;
         end
