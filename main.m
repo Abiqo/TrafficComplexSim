@@ -28,5 +28,4 @@ end
 p.proportionHistory.bikes=p.proportionHistory.bikes/runs;
 p.proportionHistory.cars=p.proportionHistory.cars/runs;
 
-
 PlotGraphs(p)
