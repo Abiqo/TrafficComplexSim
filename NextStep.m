@@ -83,8 +83,11 @@ if state(i) == 1    %cars
         nextStep = positions(i,:);
     end
 elseif state(i) == 2 %bikes
-    if isempty(nextStep) || ismember(nextStep,positionOfBikes, 'rows')
+    if isempty(nextStep) 
         nextStep = positions(i,:);
+    elseif sum(ismember(nextStep,positionOfBikes, 'rows')) > 1
+        nextStep = positions(i,:);
+        
     end
 end
 
