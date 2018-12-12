@@ -41,7 +41,7 @@ e2.MarkerSize = 5;
 e2.MarkerEdgeColor = 'blue';
 e2.MarkerFaceColor = 'blue';
 xlabel('Car proportions'); ylabel('Travel time'); legend;
-text1 = ['Mean and deviation of %d samples where'];
-text2 = ['the travel time is plotted versus proportion of cars'];
-str = sprintf(text1,p.runs);
-title({str,text2})
+text1 = {'Mean and deviation of %d samples where'} ...
+text2 = {'the travel time is plotted versus proportion of cars'};
+str = sprintf(text,p.runs);
+title(str)

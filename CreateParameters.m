@@ -1,5 +1,5 @@
 function p = CreateParameters(p)
-p.runs = 10;
+p.runs = 4;
 p.t = 0;
 p.nSteps = 7;
 p.waitingTime=20; % period of traffic light waiting time
@@ -21,5 +21,5 @@ p.agentsAtIntersection = [];
 p.carTimes = [];
 p.bikeTimes = [];
 p.currentProportionIndex = 0;
-p.proportionHistory.bikes = zeros(size(p.probOfState,1),1);
-p.proportionHistory.cars = zeros(size(p.probOfState,1),1);
+p.bikeHistory = [];
+p.carHistory = [];
