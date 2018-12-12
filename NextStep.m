@@ -94,24 +94,6 @@ if state(i) == 1
     if isempty(nextStep) || ismember(nextStep,positionOfCars, 'rows')
         nextStep = positions(i,:);
     end
-<<<<<<< HEAD
-=======
-elseif state(i) == 2 %bikes
-    if isempty(nextStep) 
-        nextStep = positions(i,:);
-    else 
-        count = 0;
-        for k = 1:size(positionOfBikes,1)
-            if isequal(nextStep,positionOfBikes(k,:), 'rows')
-                count = count + 1;
-            end
-        end
-        if count > 1
-            nextStep = positions(i,:);
-        end
-        
-    end
->>>>>>> 514a44200d47fd2442b96e3aa5219248cc651202
 end
 
 
