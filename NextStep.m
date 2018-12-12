@@ -85,8 +85,16 @@ if state(i) == 1    %cars
 elseif state(i) == 2 %bikes
     if isempty(nextStep) 
         nextStep = positions(i,:);
-    elseif sum(ismember(nextStep,positionOfBikes, 'rows')) > 1
-        nextStep = positions(i,:);
+    else 
+        count = 0;
+        for k = 1:size(positionOfBikes,1)
+            if isequal(nextStep,positionOfBikes(k,:), 'rows')
+                count = count + 1;
+            end
+        end
+        if count > 1
+            nextStep = positions(i,:);
+        end
         
     end
 end
