@@ -17,6 +17,7 @@ meanBike(1) = [];
 
 errBike(end+1) = errBike(1);
 errBike(1) = [];
+errBike = errBike/sqrt(p.runs);
 
 
 
@@ -35,7 +36,7 @@ for eachProportion = 1:p.currentProportionIndex
     errCar(end+1) = std(p.carHistory(:,eachProportion));
 
 end
-
+errCar = errCar/sqrt(p.runs);
 
 
 e2 = errorbar(carProportions,meanCar,errCar);
