@@ -14,7 +14,17 @@ for eachProportion = 1:p.currentProportionIndex
     positiveYDifferenceBike(eachProportion,1) = maxBike - meanBike(eachProportion,1);
 end
 
-e1 = errorbar(carProportions,meanBike,negativeYDifferenceBike,positiveYDifferenceBike);
+meanBike(end+1) = meanBike(1);
+meanBike(1) = [];
+
+positiveYDifferenceBike(end+1) = positiveYDifferenceBike(1);
+positiveYDifferenceBike(1) = [];
+
+negativeYDifferenceBike(end+1) = negativeYDifferenceBike(1);
+
+negativeYDifferenceBike(1) = [];
+
+e1 = errorbar(flipud(carProportions),meanBike,negativeYDifferenceBike,positiveYDifferenceBike);
 e1.Color = 'red';
 e1.DisplayName = 'Bikes';
 e1.Marker = 'o';
@@ -33,7 +43,7 @@ for eachProportion = 1:p.currentProportionIndex
     maxCar = max(currentCarProportion);
     positiveYDifferenceBike(eachProportion,1) = maxCar - meanCar(eachProportion,1);
 end
-e2 = errorbar(flipud(carProportions),meanCar,negativeYDifferenceBike,positiveYDifferenceBike);
+e2 = errorbar(carProportions,meanCar,negativeYDifferenceBike,positiveYDifferenceBike);
 e2.Color = 'blue';
 e2.DisplayName = 'Cars';
 e2.Marker = 'square';
