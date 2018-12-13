@@ -3,28 +3,24 @@ function PlotGraphs(p)
 figure(2)
 
 carProportions = p.probOfState(:,1);
-
+errBike = [];
 for eachProportion = 1:p.currentProportionIndex
     currentBikeProportion = p.bikeHistory(:,eachProportion);
     meanBike(eachProportion,1) = mean(currentBikeProportion);
-    minBike = min(currentBikeProportion);
-    negativeYDifferenceBike(eachProportion,1) = meanBike(eachProportion,1) - minBike;
-    
-    maxBike = max(currentBikeProportion);
-    positiveYDifferenceBike(eachProportion,1) = maxBike - meanBike(eachProportion,1);
+
+    errBike(end+1) = std(p.bikeHistory(:,eachProportion));
+
 end
 
 meanBike(end+1) = meanBike(1);
 meanBike(1) = [];
 
-positiveYDifferenceBike(end+1) = positiveYDifferenceBike(1);
-positiveYDifferenceBike(1) = [];
+errBike(end+1) = errBike(1);
+errBike(1) = [];
 
-negativeYDifferenceBike(end+1) = negativeYDifferenceBike(1);
 
-negativeYDifferenceBike(1) = [];
 
-e1 = errorbar(flipud(carProportions),meanBike,negativeYDifferenceBike,positiveYDifferenceBike);
+e1 = errorbar(flipud(carProportions),meanBike,errBike);
 e1.Color = 'red';
 e1.DisplayName = 'Bikes';
 e1.Marker = 'o';
@@ -32,17 +28,17 @@ e1.MarkerSize = 5;
 e1.MarkerEdgeColor = 'red';
 e1.MarkerFaceColor = 'red';
 hold on;
-
+errCar = [];
 for eachProportion = 1:p.currentProportionIndex
     currentCarProportion = p.carHistory(:,eachProportion);
     meanCar(eachProportion,1) = mean(currentCarProportion);
-    minCar = min(currentCarProportion);
-    negativeYDifferenceBike(eachProportion,1) = meanCar(eachProportion,1) - minCar;
-    
-    maxCar = max(currentCarProportion);
-    positiveYDifferenceBike(eachProportion,1) = maxCar - meanCar(eachProportion,1);
+    errCar(end+1) = std(p.carHistory(:,eachProportion));
+
 end
-e2 = errorbar(carProportions,meanCar,negativeYDifferenceBike,positiveYDifferenceBike);
+
+
+
+e2 = errorbar(carProportions,meanCar,errCar);
 e2.Color = 'blue';
 e2.DisplayName = 'Cars';
 e2.Marker = 'square';
