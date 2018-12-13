@@ -21,28 +21,51 @@ p.storedCars{p.t} = positionOfCars;
 % haven't fixed mega potential mega queues for bikes
 
 % avoid mega queues
-if p.t > 5
+if p.t > 1
     olderPositions = p.storedCars{p.t-1};
     oldPositions = positionOfCars;
-  
-        count = 0;
-        for i = 1:size(oldPositions,1)
-            if ismember(oldPositions(i,:),olderPositions)
-                count = count + 1;
-            end
+    
+    count = 0;
+    for i = 1:size(oldPositions,1)
+        if ismember(oldPositions(i,:),olderPositions)
+            count = count + 1;
         end
-        if count/size(oldPositions,1) > 0.6
-            for k = 1:size(positionOfCars,1)
-                mapState(k) = p.cityMap(positionOfCars(k,1),positionOfCars(k,2));
-            end
-            agents_intersection = find(mapState == 3);  
-            position_critical_agent = positionOfCars(agents_intersection,:);
-        else
-            position_critical_agent = [];
+    end
+    if count/size(oldPositions,1) > 0.6
+        for k = 1:size(positionOfCars,1)
+            mapState(k) = p.cityMap(positionOfCars(k,1),positionOfCars(k,2));
         end
+        agents_intersection = find(mapState == 3);
+        position_critical_agent = positionOfCars(agents_intersection,:);
     else
         position_critical_agent = [];
     end
+else
+    position_critical_agent = [];
+end
+
+
+%     if isequal(oldPositions,olderPositions) == 1
+%         
+%         if size(positionOfCars,1) > 0
+%             for k = 1:size(positionOfCars,1)
+%                 mapState(k) = p.cityMap(positionOfCars(k,1),positionOfCars(k,2));
+%             end
+%             
+%             agents_intersection = find(mapState == 3);
+%             
+%             position_critical_agent = positionOfCars(agents_intersection,:);
+%             
+%         else
+%             position_critical_agent = [];
+%         end
+%     else
+%         position_critical_agent = [];
+%     end
+% else
+%     position_critical_agent = [];
+%     
+% end
     
 %Update the agents
 for i = 1:p.nAgents
@@ -123,25 +146,4 @@ agentInfo(emptyCells) = [];
 %             mapState(k) = p.cityMap(positionOfCars(k,1),positionOfCars(k,2));
 % =======
 
-%     if isequal(oldPositions,olderPositions) == 1
-%         
-%         if size(positionOfCars,1) > 0
-%             for k = 1:size(positionOfCars,1)
-%                 mapState(k) = p.cityMap(positionOfCars(k,1),positionOfCars(k,2));
-%             end
-%             
-%             agents_intersection = find(mapState == 3);
-%             
-%             position_critical_agent = positionOfCars(agents_intersection,:);
-%             
-%         else
-%             position_critical_agent = [];
-%         end
-%     else
-%         position_critical_agent = [];
-%     end
-% else
-%     position_critical_agent = [];
-%     
-% end
 

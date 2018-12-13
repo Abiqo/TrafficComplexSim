@@ -70,11 +70,11 @@ end
 %The next step is the closestPoint such that it is the minimum Distance
 %nextStep = closestPoints(indexOfMin,:);
 
-if ismember(positions(i,:),position_critical_agent) 
+if ismember(positions(i,:),position_critical_agent)
     if ismember(nextStep,positionOfCars, 'rows') == 1
         nextStep = closestPoints(find(dist_direction == maxDistance,1),:);
-    elseif ismember(nextStep,positionOfBikes, 'rows') == 1 
-        nextStep = closestPoints(find(dist_direction == maxDistance,1),:); 
+    %elseif ismember(nextStep,positionOfBikes, 'rows') == 1 
+    %    nextStep = closestPoints(find(dist_direction == maxDistance,1),:); 
     end
 end
 
@@ -88,11 +88,11 @@ elseif state(i) == 2 %bikes
     else 
         count = 0;
         for k = 1:size(positionOfBikes,1)
-            if isequal(nextStep,positionOfBikes(k,:), 'rows')
+            if isequal(nextStep,positionOfBikes(k,:))
                 count = count + 1;
             end
         end
-        if count > 1
+        if count > 2
             nextStep = positions(i,:);
         end
         

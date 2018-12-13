@@ -1,5 +1,5 @@
 function p = CreateParameters(p)
-p.runs = 3;
+p.runs = 1;
 p.t = 0;
 p.nSteps = 7;
 p.waitingTime=20; % period of traffic light waiting time
@@ -13,7 +13,7 @@ p.nTimesteps = 1000;
 p.previousStep = [];
 p.N = 30; % N has to be a number of size k*nSteps+2 in order for the city to have a road in the outer bounds
 %Create propability vector that it is a car/bike
-p.probOfState = [0.5 0.5] %CreateStateProportions;
+p.probOfState = CreateStateProportions;
 p.cityMap = InitGrid(p);
 p.buildingPos = CreateBuildings(p);
 p.intersectionPositions = IntersectionPositions(p);

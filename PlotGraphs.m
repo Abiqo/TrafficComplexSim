@@ -50,5 +50,5 @@ xlabel('Car proportions','FontSize',20); ylabel('Mean travel time','FontSize',20
 text1 = ['Number of runs =  %d'];
 text2 = ['Number of agents = %d'];
 str1 = sprintf(text1,p.runs);
-str2 = sprintf(text2,p.nAgents_start)
+str2 = sprintf(text2,p.nAgents_start);
 title({str1,str2})
