@@ -33,7 +33,7 @@ for eachProportion = 1:p.currentProportionIndex
     maxCar = max(currentCarProportion);
     positiveYDifferenceBike(eachProportion,1) = maxCar - meanCar(eachProportion,1);
 end
-e2 = errorbar(carProportions,meanCar,negativeYDifferenceBike,positiveYDifferenceBike);
+e2 = errorbar(flipud(carProportions),meanCar,negativeYDifferenceBike,positiveYDifferenceBike);
 e2.Color = 'blue';
 e2.DisplayName = 'Cars';
 e2.Marker = 'square';
