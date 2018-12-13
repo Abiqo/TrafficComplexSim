@@ -40,8 +40,8 @@ e2.Marker = 'square';
 e2.MarkerSize = 5; 
 e2.MarkerEdgeColor = 'blue';
 e2.MarkerFaceColor = 'blue';
-xlabel('Car proportions'); ylabel('Travel time'); legend;
-text1 = ['Mean and deviation of %d samples where'];
+xlabel('Car proportions','FontSize',20); ylabel('Mean travel time','FontSize',20); legend;
+text1 = ['Number of runs =  %d'];
 text2 = ['Number of agents = %d'];
 str1 = sprintf(text1,p.runs);
 str2 = sprintf(text2,p.nAgents_start)
