@@ -13,7 +13,7 @@ while(p.currentProportionIndex < testProportionSize)
         %Run until all the agents have reached a destination
         while(p.nAgents>0)
             p.t = p.t + 1;
-            %Vizualisation(agentInfo, p)
+            Vizualisation(agentInfo, p)
             [agentInfo, previousStep, p] = UpdateAgents(agentInfo, p, previousStep);
         end        
         

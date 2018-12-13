@@ -33,7 +33,6 @@ e1.MarkerEdgeColor = 'red';
 e1.MarkerFaceColor = 'red';
 hold on;
 
-
 for eachProportion = 1:p.currentProportionIndex
     currentCarProportion = p.carHistory(:,eachProportion);
     meanCar(eachProportion,1) = mean(currentCarProportion);

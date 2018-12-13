@@ -46,7 +46,7 @@ set(hLeg,'visible','off');
 
 %gray=[0.5 0.5 0.5].*ones(p.nAgents,1);
 hold on
-scatter(buildingPos(:,1),buildingPos(:,2),N*50,'square','Filled','black')
+scatter(buildingPos(:,1),buildingPos(:,2),N*20,'square','Filled','black')
 if mod(p.t,p.waitingTime) < p.waitingTime/2
     title(['t = ', num2str(t),' [s]',', green for left/right'])
     hold on
