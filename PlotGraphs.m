@@ -4,9 +4,44 @@ figure(2)
 
 carProportions = p.probOfState(:,1);
 
-plot(carProportions,p.proportionHistory.cars,'red')
-hold on;
-plot(flipud(carProportions),p.proportionHistory.bikes,'blue');
+for eachProportion = 1:p.currentProportionIndex
+    currentBikeProportion = p.bikeHistory(:,eachProportion);
+    meanBike(eachProportion,1) = mean(currentBikeProportion);
+    minBike = min(currentBikeProportion);
+    negativeYDifferenceBike(eachProportion,1) = meanBike(eachProportion,1) - minBike;
+    
+    maxBike = max(currentBikeProportion);
+    positiveYDifferenceBike(eachProportion,1) = maxBike - meanBike(eachProportion,1);
+end
 
-legend('Cars','Bikes');
-xlabel('Car proportions'); ylabel('Mean travel time');
+e1 = errorbar(carProportions,meanBike,negativeYDifferenceBike,positiveYDifferenceBike);
+e1.Color = 'red';
+e1.DisplayName = 'Bikes';
+e1.Marker = 'o';
+e1.MarkerSize = 5;
+e1.MarkerEdgeColor = 'red';
+e1.MarkerFaceColor = 'red';
+hold on;
+
+
+for eachProportion = 1:p.currentProportionIndex
+    currentCarProportion = p.carHistory(:,eachProportion);
+    meanCar(eachProportion,1) = mean(currentCarProportion);
+    minCar = min(currentCarProportion);
+    negativeYDifferenceBike(eachProportion,1) = meanCar(eachProportion,1) - minCar;
+    
+    maxCar = max(currentCarProportion);
+    positiveYDifferenceBike(eachProportion,1) = maxCar - meanCar(eachProportion,1);
+end
+e2 = errorbar(carProportions,meanCar,negativeYDifferenceBike,positiveYDifferenceBike);
+e2.Color = 'blue';
+e2.DisplayName = 'Cars';
+e2.Marker = 'square';
+e2.MarkerSize = 5; 
+e2.MarkerEdgeColor = 'blue';
+e2.MarkerFaceColor = 'blue';
+xlabel('Car proportions'); ylabel('Travel time'); legend;
+text1 = ['Mean and deviation of %d samples where'];
+text2 = ['the travel time is plotted versus proportion of cars'];
+str = sprintf(text1,p.runs);
+title({str,text2})
