@@ -46,10 +46,11 @@ e2.Marker = 'square';
 e2.MarkerSize = 5; 
 e2.MarkerEdgeColor = 'blue';
 e2.MarkerFaceColor = 'blue';
-xlabel('Car proportions','FontSize',40); ylabel('Mean travel time','FontSize',40); 
+xlabel('Porportion of cars','FontSize',40); ylabel('Mean travel time','FontSize',40); 
 legend('FontSize',40);
 text1 = ['Number of runs =  %d'];
 text2 = ['Number of agents = %d'];
 str1 = sprintf(text1,p.runs);
 str2 = sprintf(text2,p.nAgents_start);
 title({str1,str2},'FontSize',40)
+set(gca,'FontSize',40)
