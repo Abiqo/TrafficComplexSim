@@ -92,7 +92,7 @@ elseif state(i) == 2 %bikes
                 count = count + 1;
             end
         end
-        if count > 2
+        if count > 1
             nextStep = positions(i,:);
         end
         

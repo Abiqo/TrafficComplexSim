@@ -25,7 +25,7 @@ for i = 1:p.nAgents
    if find(state(i)==1)
         velDelay(i) = 2;
     elseif find(state(i)==2)
-        velDelay(i) = 3;
+        velDelay(i) = 2;
    end
     agentInfo{i}={position(i,1:2);destination(i,1:2);state(i);velDelay(i)};
 end

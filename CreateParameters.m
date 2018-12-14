@@ -1,8 +1,8 @@
 function p = CreateParameters(p)
-p.runs = 1;
+p.runs = 10;
 p.t = 0;
 p.nSteps = 7;
-p.waitingTime=20; % period of traffic light waiting time
+p.waitingTime = 20; % period of traffic light waiting time
 p.nAgents_start = 400; %max 400 with gridSize 30
 p.nAgents = p.nAgents_start;
 p.storedCars = [];
